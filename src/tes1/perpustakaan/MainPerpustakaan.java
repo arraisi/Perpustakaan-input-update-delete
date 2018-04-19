@@ -50,8 +50,8 @@ public class MainPerpustakaan {
             book.setAuthor(input.next());
             System.out.print(" No ISBN : ");
             daftarBuku.put(input.next(), book);
-                            
-            } 
+
+        }
         for (Map.Entry<String, Book> entry : daftarBuku.entrySet()) {
             System.out.println(entry.getKey());
             Book buku = entry.getValue();
@@ -65,15 +65,28 @@ public class MainPerpustakaan {
             Book book = new Book();
 
             System.out.print(" No ISBN : ");
-            daftarBuku.remove(input.next());
+            String jawabSementara = input.next();
 
             String yakin = "y";
             System.out.println("y/n");
             yakin = input.next();
 
             if (yakin.equals("y")) {
+                daftarBuku.remove(jawabSementara);
                 isKurang = false;
+                for (Map.Entry<String, Book> entry : daftarBuku.entrySet()) {
+                    System.out.println(entry.getKey());
+                    Book buku = entry.getValue();
+                    System.out.println(" Judul  Buku : " + buku.getTitle() + "  pengarang " + buku.getAuthor());
+                }
+                System.out.println("____________________________________________________________________ ");
             } else {
+                for (Map.Entry<String, Book> entry : daftarBuku.entrySet()) {
+                    System.out.println(entry.getKey());
+                    Book buku = entry.getValue();
+                    System.out.println(" Judul  Buku : " + buku.getTitle() + "  pengarang " + buku.getAuthor());
+                }
+                System.out.println("____________________________________________________________________ ");
                 isKurang = true;
             }
         }
@@ -83,9 +96,7 @@ public class MainPerpustakaan {
             System.out.println(" Judul  Buku : " + buku.getTitle() + "  pengarang " + buku.getAuthor());
         }
         System.out.println("____________________________________________________________________ ");
-        
+
 //UPDATE BUKU
-        
-        
     }
 }
