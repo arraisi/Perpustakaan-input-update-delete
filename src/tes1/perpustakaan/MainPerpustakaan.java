@@ -17,31 +17,46 @@ public class MainPerpustakaan {
         Map<String, Book> daftarBuku = new LinkedHashMap<String, Book>();
         Peminjam pinjam = new Peminjam();
         Map<String, Peminjam> daftarPeminjam = new LinkedHashMap<String, Peminjam>();
+
+        int menu;
+        System.out.println("Pilih Menu      : ");
+        System.out.println("1. Menu Buku       : ");
+        System.out.println("2. Menu Pinjaman   : ");
+        menu = input.nextInt();
+
+        switch (menu) {
+            case 1:
 //************************************************************************** 
-        /*DAFTAR BUKU*/
+                                /*DAFTAR BUKU*/
 //************************************************************************** 
 //INPUT DATA BUKU        
-        Map<String, Book> daftarBukuOut = inputData();
-        showData(daftarBukuOut);
+                Map<String, Book> daftarBukuOut = inputData();
+                showData(daftarBukuOut);
 
 //UPDATE DATA
-        Map<String, Book> daftarBukuUpdate = updateData(daftarBukuOut);
-        showData(daftarBukuUpdate);
+                Map<String, Book> daftarBukuUpdate = updateData(daftarBukuOut);
+                showData(daftarBukuUpdate);
 
 //MENGHAPUS DATA                
-        Map<String, Book> daftarBukuDelete = deleteData(daftarBukuOut);
-        showData(daftarBukuUpdate);
+                Map<String, Book> daftarBukuDelete = deleteData(daftarBukuOut);
+                showData(daftarBukuUpdate);
 
+                break;
+            case 2:
 //**************************************************************************        
-        /*DAFTAR PEMINJAM*/
+                            /*DAFTAR PEMINJAM*/
 //**************************************************************************
 //INPUT DATA PEMINJAM
-        Map<String, Peminjam> daftarPeminjamInput = inputPeminjam();
-        showDataPeminjam(daftarPeminjamInput);
+                Map<String, Peminjam> daftarPeminjamInput = inputPeminjam();
+                showDataPeminjam(daftarPeminjamInput);
 
 //DELETE DATA PEMINJAM
-        Map<String, Peminjam> daftarPeminjamDelete = deleteDataPeminjam(daftarPeminjamInput);
-        showDataPeminjam(daftarPeminjamInput);
+                Map<String, Peminjam> daftarPeminjamDelete = deleteDataPeminjam(daftarPeminjamInput);
+                showDataPeminjam(daftarPeminjamInput);
+
+                break;
+
+        }
 
         /*BATAS MAIN*/
     }
