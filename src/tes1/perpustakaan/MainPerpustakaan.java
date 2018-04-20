@@ -24,10 +24,9 @@ public class MainPerpustakaan {
         System.out.println("2. Menu Pinjaman   : ");
         menu = input.nextInt();
 
-        switch (menu) {
-            case 1:
+        
 //************************************************************************** 
-                                /*DAFTAR BUKU*/
+                /*DAFTAR BUKU*/
 //************************************************************************** 
 //INPUT DATA BUKU        
                 Map<String, Book> daftarBukuOut = inputData();
@@ -41,10 +40,9 @@ public class MainPerpustakaan {
                 Map<String, Book> daftarBukuDelete = deleteData(daftarBukuOut);
                 showData(daftarBukuUpdate);
 
-                break;
-            case 2:
+            
 //**************************************************************************        
-                            /*DAFTAR PEMINJAM*/
+                /*DAFTAR PEMINJAM*/
 //**************************************************************************
 //INPUT DATA PEMINJAM
                 Map<String, Peminjam> daftarPeminjamInput = inputPeminjam();
@@ -53,14 +51,18 @@ public class MainPerpustakaan {
 //DELETE DATA PEMINJAM
                 Map<String, Peminjam> daftarPeminjamDelete = deleteDataPeminjam(daftarPeminjamInput);
                 showDataPeminjam(daftarPeminjamInput);
-
-                break;
-
-        }
+//PINJAM BUKU
+                Map<String, Book> bukuDiPinjam = pinjamBuku(daftarBukuUpdate, daftarPeminjamInput);  
+                showDataBukuPinjam(bukuDiPinjam);
+                
+       
 
         /*BATAS MAIN*/
     }
 
+//**************************************************************************        
+    /*DAFTAR PINJAM BUKU*/
+//**************************************************************************
 //METHODS TAMPILAN BOOK
     public static void showData(Map<String, Book> daftarBuku) {
         for (Map.Entry<String, Book> entry : daftarBuku.entrySet()) {
@@ -174,12 +176,24 @@ public class MainPerpustakaan {
         }
         System.out.println("____________________________________________________________________ ");
     }
+    //METHODS TAMPILAN BUKU DI PINJAM
+
+    public static void showDataBukuPinjam(Map<String, Book> bukuDiPinjam) {
+        for (Map.Entry<String, Book> entry : bukuDiPinjam.entrySet()) {
+            System.out.println(entry.getKey());
+            Book dipinjam = entry.getValue();
+            System.out.println(" Judul : " + dipinjam.getTitle() + "  Pengarang " + dipinjam.getAuthor());
+        }
+        System.out.println("____________________________________________________________________ ");
+    }
 //METHODS INPUT PEMINJAM
 
     public static Map<String, Peminjam> inputPeminjam() {
         boolean isTambah = true;
         boolean isKurang = true;
         Map<String, Peminjam> daftarPeminjam = new LinkedHashMap<String, Peminjam>();
+        
+        
         while (isTambah) {
             Scanner input = new Scanner(System.in);
             Peminjam pinjam = new Peminjam();
@@ -244,4 +258,45 @@ public class MainPerpustakaan {
         }
         return deleteDataPeminjam;
     }
+
+//METHODS PINJAM BUKU
+    private static Map<String, Book> pinjamBuku(Map<String, Book> bukuDiPinjam, Map<String, Peminjam> peminjamBuku) {
+       
+        
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Ingin Pinjam Buku? y/n");
+        String jawab = input.next();
+        
+        
+        if (jawab.equals("y")) {
+            System.out.println("ID peminjam : ");
+            String id = input.next();
+            Peminjam pinjam = peminjamBuku.get(id);
+            
+            System.out.println("Nama : " + pinjam.getName()+"   | "+"Alamat : "+pinjam.getAddres());
+        } else{
+            System.out.println("");
+        }
+        
+        System.out.println("Masukan No. ISBN : ");
+        String isbn = input.next();
+        Book book = bukuDiPinjam.get(isbn);
+        
+        System.out.println("Judul : "+ book.getTitle()+"   | "+"Pengarang : "+book.getAuthor());
+        
+        System.out.println("Ingin Pinjam Buku? y/n");
+        jawab = input.next();
+        
+        if(jawab.equals("y")){
+            bukuDiPinjam.put(isbn, book);
+                    
+                    
+            
+        }
+        
+        
+        return bukuDiPinjam;
+    }
+
 }

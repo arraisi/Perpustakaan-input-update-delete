@@ -13,6 +13,14 @@ import java.util.Map;
  */
 public class Peminjam {
     private Map<String, Book> daftarBuku;
+
+    public Map<String, Book> getDaftarBuku() {
+        return daftarBuku;
+    }
+
+    public void setDaftarBuku(Map<String, Book> daftarBuku) {
+        this.daftarBuku = daftarBuku;
+    }
     private String Name;
     private String Addres;
 
